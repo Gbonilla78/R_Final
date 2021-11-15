@@ -11,7 +11,7 @@ data1 = data.frame(x=x, y=y)
 #creating the UI page
 ui <- fluidPage(
     titlePanel("R Mental Evaluation"),
-    
+    sidebarLayout(
     sidebarPanel(
         helpText("This is a Drew Steen motivational survey"),
 #creating clickable action buttons
@@ -29,7 +29,7 @@ ui <- fluidPage(
         
         sliderInput("x", " time in R", min = 1, max = 50, value = 30),
         sliderInput("y", "Projects unfinished", min = 1, max = 50, value = 5),
-        "then, (Stress level) is", textOutput("product"),
+        "then, (Stress level) is", textOutput("product")),
         
 #assigning main panel outputs      
         mainPanel(
