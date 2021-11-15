@@ -1,15 +1,21 @@
+
+#loading required packages
 library(shiny)
 library(ggplot2)
+
+#creating arbitrary stress variables and assigning data frame
 x <-c(1,2,3,4,6,7,8,9,7,6,3,5,6,7,8)
 y <-c(5,6,7,8,4,2,2,5,6,7,8,6,5,6,5)
 data1 = data.frame(x=x, y=y)
 
+#creating the UI page
 ui <- fluidPage(
     titlePanel("R Mental Evaluation"),
     
     sidebarPanel(
         helpText("This is a Drew Steen motivational survey"),
-        
+#creating clickable action buttons
+
         actionButton("button", "Click me if you are stressed"),
         actionButton("button", "Click me for R Stress levels"),
         selectInput("var", 
@@ -25,7 +31,7 @@ ui <- fluidPage(
         sliderInput("y", "Projects unfinished", min = 1, max = 50, value = 5),
         "then, (Stress level) is", textOutput("product"),
         
-        
+#assigning main panel outputs      
         mainPanel(
             textOutput("selected_var"),
             plotOutput("distPlot"),
@@ -33,6 +39,7 @@ ui <- fluidPage(
         )
     )
 )
+#creating separate server functions
 server <- function(input, output, session) {
     output$product <- renderText({ 
         product <- input$x * input$y
@@ -50,8 +57,7 @@ server <- function(input, output, session) {
         plot(data1, mapping = aes(x="Stress", y="Time_Spent")  
              
              + geom_count())    
-        #error lies somewhere in here
-        #when adding function here other function doesnt work
+        
         
         
         
