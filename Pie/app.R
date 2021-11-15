@@ -17,7 +17,7 @@ ui <- fluidPage(
 #creating clickable action buttons
 
         actionButton("button", "Click me if you are stressed"),
-        actionButton("button", "Click me for R Stress levels"),
+        actionButton("buton", "Click me for R Stress levels"),
         selectInput("var", 
                     label = "Stress level from R",
                     choices = c("Very low", 
@@ -53,13 +53,12 @@ server <- function(input, output, session) {
     observeEvent(input$button, {
         output$text <- renderText({"You arent stressed, back in my day we had to write R code on a calculator and use it to power jets. Get back to work"})    
     })
+    observeEvent(input$buton, {
     output$distPlot <- renderPlot({
-        plot(data1, mapping = aes(x="Stress", y="Time_Spent")  
-             
-             + geom_count())    
+        ggplot(data1) +  geom_point(aes(x=x,y=y))   
         
         
-        
+    })       
         
     })
     
