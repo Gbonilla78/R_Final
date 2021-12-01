@@ -1,0 +1,94 @@
+---
+title: "R Final"
+output: github_document
+  
+---
+This is a  series of predictive models looking at how external factors (observable variables) correlate with concentration and influence
+of microplastics (latent variables). These models utilize structural equation modeling and the "lavaan" package to produce path analysis
+plots to examine the direction and strength of the relationship between variables.
+for more information  follow these links
+
+Lavaan package (https://lavaan.ugent.be/)
+Sem package (https://cran.r-project.org/web/packages/sem/sem.pdf)
+```{r ,warning=FALSE, message=FALSE}
+
+
+ 
+#loading in required packages
+library(lavaan)  #for performing the CFA
+library(semPlot)  #for plotting your CFA
+library(dplyr)  #for subsetting data 
+
+#setting working directory
+setwd("C:/Users/Bryce Bonilla/Desktop")
+
+#reading in data
+semdata <- read.csv("GIS_R_Micro.csv")
+#add column names
+names(semdata) <- c("Sample","Number","ChemType","PhysType","Color","Date","Lat","Lon","Inputs","Proximity","Zones")
+head(semdata)  #view data file to see what data is pulled in
+```
+# Model fit 1 Structural Regression Model
+```{r, warning=FALSE, message=FALSE}
+
+
+#Creating the sem model with latent variables
+#Creating predictor variables by regression of latent variables
+sem.model.measurement <- "CON =~ 1*Number + ChemType + PhysType + Color
+Infl =~ 1*Number + Inputs + Proximity + Zones
+CON ~ Sample + Infl
+Infl ~ Sample + CON"
+
+#attaching model to sem and reading data
+sem.fit.measurement <- sem(sem.model.measurement, data = semdata)
+#summarizing model and plotting
+summary(sem.fit.measurement, fit.measures = TRUE)
+semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more. 
+
+#local image code path diagram for model 1
+library("png")
+pp <- readPNG("pathlegend1.png")
+plot.new() 
+rasterImage(pp,0,0,1,1)
+
+```
+
+# Model fit 2 Exogenous factor analysis
+```{r, warning=FALSE, message=FALSE}
+
+
+#creating latent variables and predictors
+m2<- 'CON =~ Number + ChemType+ PhysType
+#intercepts (nu = tau) 
+#Specifying parameters on observed variables
+Number ~ 1
+ChemType ~ 1 
+PhysType ~ 1' 
+Fitm2 <- sem(m2, data=semdata) 
+summary(Fitm2, standardized=TRUE)
+semPaths(Fitm2, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
+
+#local image code path diagram for model 2
+
+pp2 <- readPNG("pathlegend3.png")
+plot.new() 
+rasterImage(pp2,0,0,1,1)
+```
+
+# Model fit 3 path analysis
+```{r, warning=FALSE, message=FALSE}
+
+
+
+m3 <- "Number ~ 1 + ChemType + PhysType
+Inputs ~ 1 + Proximity + Zones"
+fit3 <- sem(m3, data=semdata)
+summary(fit3)
+semPaths(fit3, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
+ 
+#local image code path diagram for model 3       
+
+pp3 <- readPNG("pathlegend2.png")
+plot.new() 
+rasterImage(pp3,0,0,1,1)
+```
