@@ -1,17 +1,34 @@
-R Final
+Structural Equation Modeling
 ================
 
-This is a series of predictive models looking at how external factors
-(observable variables) correlate with concentration and influence of
-microplastics (latent variables). These models utilize structural
-equation modeling and the “lavaan” package to produce path analysis
-plots to examine the direction and strength of the relationship between
-variables. for more information follow these links
+This is a series of predictive models looking at how observable factors
+such as microplastic type, number, and inputs correlate with
+unobservable factors such as environmental conditions and influence.
+These models utilize structural equation modeling package “semplot” and
+the “lavaan” package to produce path analysis plots to examine the
+direction and strength of the relationship between variables. For more
+information follow these links
 
 Lavaan package (<https://lavaan.ugent.be/>) Sem package
 (<https://cran.r-project.org/web/packages/sem/sem.pdf>)
 
+Structural equation models were chosen based upon the types of variables
+(see key terms below) and the combinations to indicate correlations.
+Structural regression, path analysis and factor analysis models were
+created.
+
+``` r
+library("png")
+pp4 <- readPNG("pathlegend4.png")
+plot.new() 
+rasterImage(pp4,0,0,1,1)
+```
+
+![](Micro_Final_files/figure-gfm/unnamed-chunk-1-1.png)<!-- -->
+
 ## Data preparation
+
+### Note: This data was made for instructional purposes and holds no true value. Variances and covariances are high in certain models and should be taken as unreliable
 
 ``` r
 #loading in required packages
@@ -42,7 +59,38 @@ head(semdata)  #view data file to see what data is pulled in
     ## 5 W 83Â°56'30.3612"      3         5     7
     ## 6 W 83Â°56'27.3264"      6         3     8
 
+## Path diagram for models
+
+Structural equation models have generalized objects that represent
+paths, variables, and markers and are represented with the diagram below
+
+### Key terms
+
+observed variable: a variable that exists in the data latent variable: a
+variable that is constructed and does not exist in the data exogenous
+variable: A variable that is independent of other variables within the
+system and is treated as a single entity endogenous variable: A variable
+whos change is reliant on its relationship with other variables in a
+system Green line: positive correlation Red line: negative correlation
+Dashed line: non-significant correlation
+
+``` r
+pp <- readPNG("pathlegend1.png")
+plot.new() 
+rasterImage(pp,0,0,1,1)
+```
+
+![](Micro_Final_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+
 # Model fit 1 Structural Regression Model
+
+## Path diagram for model 1
+
+This first model creates latent variables of Environmental Conditions
+(CON) and Influence of Urban Inputs (INF). This model not only regresses
+upon each of the observable variables to determine correlation but also
+measures the correlation between the latent variables. This is indicated
+by the numbers preceding the arrows.
 
 ``` r
 #Creating the sem model with latent variables
@@ -117,20 +165,29 @@ summary(sem.fit.measurement, fit.measures = TRUE)
 semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more.
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
-## Path diagram for model 1
+# Model fit 2 Endogenous factor analysis
+
+## Path diagram for model 2
+
+The second model is a single factor analysis that looks to examine how
+each endogenous variable correlates separately to the latent variable.
+Where y1,y2,y3 represent observed variables of Chemical Type, Physical
+Type, and Number of micro plastics and n1 represents the unobservable,
+latent variable of environmental conditions. This is modeled by
+pre-establishing parameters indicated by the triangle paths. Where the
+intercept = 1 the covariance = 0. Creating a specified parameter changes
+the model to indicate no variability between observable variables and
+isolates the single factor.
 
 ``` r
-library("png")
-pp <- readPNG("pathlegend1.png")
+pp2 <- readPNG("pathlegend3.png")
 plot.new() 
-rasterImage(pp,0,0,1,1)
+rasterImage(pp2,0,0,1,1)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
-
-# Model fit 2 Exogenous factor analysis
+![](Micro_Final_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 ``` r
 #creating latent variables and predictors
@@ -189,19 +246,29 @@ summary(Fitm2, standardized=TRUE)
 semPaths(Fitm2, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
-
-## Path diagram for model 2
-
-``` r
-pp2 <- readPNG("pathlegend3.png")
-plot.new() 
-rasterImage(pp2,0,0,1,1)
-```
-
-![](Micro_Final_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 # Model fit 3 path analysis
+
+### Path diagram for model 3
+
+The final model is a path analysis where exogenous variables x1 and x2
+(zones and proximity) predict and explain endogenous variables y1 and y2
+(Chemical Type and Physical Type). This model helps explain how the
+variables are related to each other and like the previous model,
+isolates the observable variables to compare to one another by
+establishing a covariance of 0 when the intercept is 1. For example, in
+the model below Chemical Type (Cht), Physical Type (Pht), and Inputs
+(Inp) can predict Number of plastics (Nmb). However Pht is only
+predicted by Proximity to input (Prx) and Cht.
+
+``` r
+pp3 <- readPNG("pathlegend2.png")
+plot.new() 
+rasterImage(pp3,0,0,1,1)
+```
+
+![](Micro_Final_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 ``` r
 m3 <- "Number ~ 1 + ChemType + PhysType
@@ -259,14 +326,4 @@ summary(fit3)
 semPaths(fit3, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
-
-### Path diagram for model 3
-
-``` r
-pp3 <- readPNG("pathlegend2.png")
-plot.new() 
-rasterImage(pp3,0,0,1,1)
-```
-
-![](Micro_Final_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
