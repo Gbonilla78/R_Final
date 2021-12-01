@@ -11,6 +11,8 @@ variables. for more information follow these links
 Lavaan package (<https://lavaan.ugent.be/>) Sem package
 (<https://cran.r-project.org/web/packages/sem/sem.pdf>)
 
+## Data preparation
+
 ``` r
 #loading in required packages
 library(lavaan)  #for performing the CFA

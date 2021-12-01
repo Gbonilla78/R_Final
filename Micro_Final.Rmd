@@ -10,6 +10,8 @@ for more information  follow these links
 
 Lavaan package (https://lavaan.ugent.be/)
 Sem package (https://cran.r-project.org/web/packages/sem/sem.pdf)
+
+## Data preparation
 ```{r ,warning=FALSE, message=FALSE}
 
 
