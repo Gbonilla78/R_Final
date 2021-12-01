@@ -21,8 +21,6 @@ library(lavaan)  #for performing the CFA
 library(semPlot)  #for plotting your CFA
 library(dplyr)  #for subsetting data 
 
-#setting working directory
-setwd("C:/Users/Bryce Bonilla/Desktop")
 
 #reading in data
 semdata <- read.csv("GIS_R_Micro.csv")
