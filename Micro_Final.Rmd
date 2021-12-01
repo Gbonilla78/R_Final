@@ -30,8 +30,6 @@ head(semdata)  #view data file to see what data is pulled in
 ```
 # Model fit 1 Structural Regression Model
 ```{r, warning=FALSE, message=FALSE}
-
-
 #Creating the sem model with latent variables
 #Creating predictor variables by regression of latent variables
 sem.model.measurement <- "CON =~ 1*Number + ChemType + PhysType + Color
@@ -43,9 +41,12 @@ Infl ~ Sample + CON"
 sem.fit.measurement <- sem(sem.model.measurement, data = semdata)
 #summarizing model and plotting
 summary(sem.fit.measurement, fit.measures = TRUE)
-semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more. 
+semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more.
+```
 
-#local image code path diagram for model 1
+## Path diagram for model 1
+```{r, warning=FALSE, message=FALSE}
+
 library("png")
 pp <- readPNG("pathlegend1.png")
 plot.new() 
@@ -55,8 +56,6 @@ rasterImage(pp,0,0,1,1)
 
 # Model fit 2 Exogenous factor analysis
 ```{r, warning=FALSE, message=FALSE}
-
-
 #creating latent variables and predictors
 m2<- 'CON =~ Number + ChemType+ PhysType
 #intercepts (nu = tau) 
@@ -67,8 +66,11 @@ PhysType ~ 1'
 Fitm2 <- sem(m2, data=semdata) 
 summary(Fitm2, standardized=TRUE)
 semPaths(Fitm2, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
+```
 
-#local image code path diagram for model 2
+## Path diagram for model 2
+
+```{r, warning=FALSE, message=FALSE}
 
 pp2 <- readPNG("pathlegend3.png")
 plot.new() 
@@ -77,16 +79,17 @@ rasterImage(pp2,0,0,1,1)
 
 # Model fit 3 path analysis
 ```{r, warning=FALSE, message=FALSE}
-
-
-
 m3 <- "Number ~ 1 + ChemType + PhysType
 Inputs ~ 1 + Proximity + Zones"
 fit3 <- sem(m3, data=semdata)
 summary(fit3)
 semPaths(fit3, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
- 
-#local image code path diagram for model 3       
+```
+
+### Path diagram for model 3 
+
+```{r, warning=FALSE, message=FALSE}
+      
 
 pp3 <- readPNG("pathlegend2.png")
 plot.new() 

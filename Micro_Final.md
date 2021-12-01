@@ -114,20 +114,21 @@ summary(sem.fit.measurement, fit.measures = TRUE)
     ##    .Infl                   0.177       NA
 
 ``` r
-semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more. 
+semPaths(sem.fit.measurement, "par", edge.label.cex = .75, edge.label.position= .5, fade = FALSE)  #plot our CFA. you can change layout with layout = argument. see ?semPaths() for more.
 ```
 
 ![](Micro_Final_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
+## Path diagram for model 1
+
 ``` r
-#local image code path diagram for model 1
 library("png")
 pp <- readPNG("pathlegend1.png")
 plot.new() 
 rasterImage(pp,0,0,1,1)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 # Model fit 2 Exogenous factor analysis
 
@@ -188,17 +189,17 @@ summary(Fitm2, standardized=TRUE)
 semPaths(Fitm2, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+
+## Path diagram for model 2
 
 ``` r
-#local image code path diagram for model 2
-
 pp2 <- readPNG("pathlegend3.png")
 plot.new() 
 rasterImage(pp2,0,0,1,1)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-3-2.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 # Model fit 3 path analysis
 
@@ -258,14 +259,14 @@ summary(fit3)
 semPaths(fit3, "par", edge.label.cex = 1, edge.label.position= .5, fade = FALSE)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+
+### Path diagram for model 3
 
 ``` r
-#local image code path diagram for model 3       
-
 pp3 <- readPNG("pathlegend2.png")
 plot.new() 
 rasterImage(pp3,0,0,1,1)
 ```
 
-![](Micro_Final_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
+![](Micro_Final_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
