@@ -86,11 +86,13 @@ rasterImage(pp,0,0,1,1)
 
 ## Path diagram for model 1
 
-This first model creates latent variables of Environmental Conditions
-(CON) and Influence of Urban Inputs (INF). This model not only regresses
-upon each of the observable variables to determine correlation but also
-measures the correlation between the latent variables. This is indicated
-by the numbers preceding the arrows.
+This first model is the bases of SEM modeling that creates latent
+variables of Environmental Conditions (CON) and Influence of Urban
+Inputs (INF). This model not only regresses upon each of the observable
+variables to determine correlation but also measures the correlation
+between the latent variables. This is indicated by the numbers within
+the paths. This model also calculates variance of both latent and
+observable variables indicated by the numbers attached to each variable.
 
 ``` r
 #Creating the sem model with latent variables
