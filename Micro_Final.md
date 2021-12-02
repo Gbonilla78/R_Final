@@ -1,13 +1,20 @@
 Structural Equation Modeling
 ================
 
-This is a series of predictive models looking at how observable factors
-such as microplastic type, number, and inputs correlate with
-unobservable factors such as environmental conditions and influence.
-These models utilize structural equation modeling package “semplot” and
-the “lavaan” package to produce path analysis plots to examine the
-direction and strength of the relationship between variables. For more
-information follow these links
+This is a demonstrational process only, and is to be used as a template
+for research in the near future. The data in used in this markdown is a
+placeholder but will hold the correct variable names for future
+replacement. Seven observable variables were taken to quantify the
+concentration and characteristics of microplastics within the Knoxville
+area. However, it is difficult to quantify ambigous factors such as
+overall environmental condition or urban influence.This is a series of
+predictive models looking at how some observable factors such as
+microplastic type, number, and inputs correlate with unobservable
+factors such as environmental conditions and influence. These models
+utilize structural equation modeling package “semplot” and the “lavaan”
+package to produce path analysis plots to examine the direction and
+strength of the relationship between variables. For more information
+follow these links
 
 Lavaan package (<https://lavaan.ugent.be/>) Sem package
 (<https://cran.r-project.org/web/packages/sem/sem.pdf>)
@@ -73,6 +80,28 @@ system and is treated as a single entity endogenous variable: A variable
 whos change is reliant on its relationship with other variables in a
 system Green line: positive correlation Red line: negative correlation
 Dashed line: non-significant correlation
+
+### Variable terms
+
+###### Cht- Chemical Type
+
+###### Pht- Physical Type
+
+###### Clr- Color
+
+###### Nmb- Number of microplastic pieces
+
+###### Inp- Number of urban inputs
+
+###### Prx- PRoximity to urban inputs
+
+###### Zns- Number of different classified urban zones
+
+###### Smp- Sample number
+
+###### CON- Environmental conditions
+
+###### Inf- Urban influence
 
 ``` r
 pp <- readPNG("pathlegend1.png")

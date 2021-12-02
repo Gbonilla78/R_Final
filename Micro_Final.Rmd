@@ -3,8 +3,8 @@ title: "Structural Equation Modeling"
 output: github_document
   
 ---
-This is a  series of predictive models looking at how observable factors such as microplastic type, number, and inputs correlate with unobservable factors such as environmental conditions and influence. These models utilize structural equation modeling package "semplot" and the "lavaan" package to produce path analysis
-plots to examine the direction and strength of the relationship between variables.
+This is a demonstrational process only, and is to be used as a template for research in the near future. The data in used in this markdown is a placeholder but will hold the correct variable names for future replacement. Seven observable variables were taken to quantify the concentration and characteristics of microplastics within the Knoxville area. However, it is difficult to quantify ambigous factors such as overall environmental condition or urban influence.This is a  series of predictive models looking at how some observable factors such as microplastic type, number, and inputs correlate with unobservable factors such as environmental conditions and influence. These models utilize structural equation modeling package "semplot" and the "lavaan" package to produce path analysis
+plots to examine the direction and strength of the relationship between variables. 
 For more information  follow these links
 
 Lavaan package (https://lavaan.ugent.be/)
@@ -47,6 +47,18 @@ Structural equation models have generalized objects that represent paths, variab
  Green line: positive correlation
  Red line: negative correlation
  Dashed line: non-significant correlation
+ 
+### Variable terms
+###### Cht- Chemical Type
+######  Pht- Physical Type
+###### Clr- Color
+######  Nmb- Number of microplastic pieces
+######  Inp- Number of urban inputs
+######  Prx- PRoximity to urban inputs
+######  Zns- Number of different classified urban zones
+######  Smp- Sample number
+######  CON- Environmental conditions
+######  Inf- Urban influence
 
 ```{r, warning=FALSE, message=FALSE}
 
@@ -59,7 +71,7 @@ rasterImage(pp,0,0,1,1)
 
 # Model fit 1 Structural Regression Model
 ## Path diagram for model 1
-This first model is the bases of SEM modeling  that creates latent variables of Environmental Conditions (CON) and Influence of Urban Inputs (INF). This model not only regresses upon each of the observable variables to determine correlation but also measures the correlation between the latent variables. This is indicated by the numbers within the paths. This model also calculates variance of both latent and observable variables indicated by the numbers attached to each variable.
+This first model is the bases of SEM modeling  that creates latent variables of Environmental Conditions (CON) and Influence of Urban Inputs (INF). This model not only regresses upon each of the observable variables  to determine correlation but also measures the correlation between the latent variables. This is indicated by the numbers within the paths. This model also calculates variance of both latent and observable variables indicated by the numbers attached to each variable.
 ```{r, warning=FALSE, message=FALSE}
 #Creating the sem model with latent variables
 #Creating predictor variables by regression of latent variables
